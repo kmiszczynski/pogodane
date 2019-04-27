@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<smooks-resource-list xmlns="http://www.milyn.org/xsd/smooks-1.1.xsd"
+                      xmlns:csv="http://www.milyn.org/xsd/smooks/csv-1.2.xsd">
+   <csv:reader fields="stationId,stationName,lat,lng,height,count,years,firstYear,lastYear,type" separator=";">
+      <csv:listBinding beanId="stationsList" class="pl.pogodane.generators.model.Station"/>
+   </csv:reader>
+</smooks-resource-list>
