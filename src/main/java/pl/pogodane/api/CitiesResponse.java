@@ -1,15 +1,16 @@
-package pl.pogodane.generators.model.google;
+package pl.pogodane.api;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-public class Bounds {
-   private Point northeast;
-   private Point southwest;
+@AllArgsConstructor
+public class CitiesResponse {
+   private List<City> cities;
 }

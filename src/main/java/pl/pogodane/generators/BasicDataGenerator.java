@@ -61,20 +61,20 @@ public class BasicDataGenerator {
          CompletableFuture<City> cityStationFuture = new CompletableFuture<>();
 
          completableFutures.add(cityStationFuture);
-         executorService.submit(() -> handleSingleCity(stationsMapped, city, cityStationFuture));
+         executorService.submit(() -> handleSingleCity(city, cityStationFuture));
       }
       CompletableFuture<List<City>> combinedFutures = gatherAll(completableFutures);
       List<City> cities = combinedFutures.get();
       cityRepository.saveAll(cities);
    }
 
-   private void handleSingleCity(List<pl.pogodane.mongo.Station> stationsMapped, RawLocation city, CompletableFuture<City> cityStationFuture) {
+   private void handleSingleCity(RawLocation city, CompletableFuture<City> cityStationFuture) {
       try {
          RestTemplate restTemplate = new RestTemplate();
          String query = city.getEscapedName() + "," + city.getEscapedVoivodeship();
          ResponseEntity<GeocodingResults> cityResult = restTemplate.getForEntity("https://maps.googleapis.com/maps/api/geocode/json?address=" + query + "&key=" + API_KEY, GeocodingResults.class);
          Geometry geometry = cityResult.getBody().getResults().get(0).getGeometry();
-         City cityForPersistance = cityCreator.createCityStationsForCity(city, geometry.getBounds(), geometry.getLocation(), stationsMapped);
+         City cityForPersistance = cityCreator.createCity(city, geometry.getBounds(), geometry.getLocation());
          log.info("Completed calculating of city stations for city {}", city.getEscapedName());
          cityStationFuture.complete(cityForPersistance);
       } catch (Exception e) {

@@ -14,7 +14,7 @@ public class CityStation {
    private String stationName;
    private double distanceFromCityInKilometers;
    private boolean inCityBounds;
-   private List<String> stationIds;
+   private String stationId;
    /*
      rank rules:
      base rank - 5000
@@ -22,4 +22,5 @@ public class CityStation {
      - distance from city
     */
    private double rank;
+   private String type;
 }

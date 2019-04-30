@@ -23,5 +23,7 @@ public class City {
    private BigDecimal southWestLng;
    private String name;
    private String voivodeship;
-   private List<CityStation> cityStations;
+   private List<CityStation> cityRainfallStations;
+   private List<CityStation> citySynopticStations;
+   private List<CityStation> cityMeteorologicalStations;
 }

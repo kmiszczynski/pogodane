@@ -28,7 +28,7 @@ class CityCreatorTest extends Specification {
       )
 
       when:
-      def result = cityStationCreator.createCityStationsForCity(city, bounds, cityLocation, [station])
+      def result = cityStationCreator.createCity(city, bounds, cityLocation, [station])
 
       then:
       result.getName() == 'krakow'
@@ -67,7 +67,7 @@ class CityCreatorTest extends Specification {
               lng: 18.4
       )
       when:
-      def result = cityStationCreator.createCityStationsForCity(city, bounds, cityLocation, [stationInCityBounds, stationOutOfCityBounds])
+      def result = cityStationCreator.createCity(city, bounds, cityLocation, [stationInCityBounds, stationOutOfCityBounds])
 
       then:
       def result1 = result.getCityStations().get(0)
@@ -109,7 +109,7 @@ class CityCreatorTest extends Specification {
               lng: 18.2
       )
       when:
-      def result = cityStationCreator.createCityStationsForCity(city, bounds, cityLocation, [station1, station2, station3, station4])
+      def result = cityStationCreator.createCity(city, bounds, cityLocation, [station1, station2, station3, station4])
 
       then:
       result.getCityStations().size() == 3

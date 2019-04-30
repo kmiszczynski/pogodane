@@ -5,14 +5,18 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import pl.pogodane.generators.BasicDataGenerator;
+import pl.pogodane.generators.StationsForCityGenerator;
 
 @SpringBootApplication
 public class PogodaneAppApplication implements CommandLineRunner {
 
    @Autowired
    private BasicDataGenerator basicDataGenerator;
+   @Autowired
+   private StationsForCityGenerator stationsForCityGenerator;
 
    private static final String LOAD_BASIC_DATA_PARAM = "--loadBasicData";
+   private static final String GENERATE_CITY_STATIONS_PARAM = "--generateCityStations";
 
    public static void main(String[] args) {
       SpringApplication.run(PogodaneAppApplication.class, args);
@@ -21,6 +25,9 @@ public class PogodaneAppApplication implements CommandLineRunner {
    @Override public void run(String... args) throws Exception {
       if (args.length > 0 && args[0].equals(LOAD_BASIC_DATA_PARAM)) {
          basicDataGenerator.generateBasicData();
+      }
+      if (args.length > 0 && args[0].equals(GENERATE_CITY_STATIONS_PARAM)) {
+         stationsForCityGenerator.supplyCitiesWithStations();
       }
    }
 }
