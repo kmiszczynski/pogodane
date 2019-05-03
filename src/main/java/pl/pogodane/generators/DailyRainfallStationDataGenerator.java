@@ -8,6 +8,7 @@ import org.milyn.payload.JavaResult;
 import org.milyn.payload.StringSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import pl.pogodane.generators.model.DateUtils;
 import pl.pogodane.generators.model.RawDailyRainfallStationData;
 import pl.pogodane.mongo.DailyRainfallStationData;
 import pl.pogodane.mongo.repositories.DailyRainfallStationDataRepository;
@@ -28,7 +29,6 @@ import java.util.stream.Collectors;
 @Slf4j
 public class DailyRainfallStationDataGenerator extends AbstractStationDataGenerator {
 
-   private static final String NO_MEASURE_INDICATOR = "8";
    private static final String ROOT = "/input/daily/opad";
 
    @Autowired
@@ -42,10 +42,14 @@ public class DailyRainfallStationDataGenerator extends AbstractStationDataGenera
       return new UnzippedDataFileProcessor();
    }
 
+   @Override public void persistBatch() {
+
+   }
+
    private class UnzippedDataFileProcessor extends SimpleFileVisitor<Path> {
       @Override public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
          File tempFile = file.toFile();
-         if (!tempFile.getName().contains(".csv")) {
+         if (isNotCsvFile(tempFile)) {
             return FileVisitResult.CONTINUE;
          }
          log.info("Processing temp file: {}", file.getFileName());
@@ -65,18 +69,15 @@ public class DailyRainfallStationDataGenerator extends AbstractStationDataGenera
             dailyRainfallStationDataRepository.saveAll(mappedData);
          } catch (Exception e) {
             log.error("Exception occured while processing CSV file.", e);
+         } finally {
+            tempFile.delete();
+            log.info("Temp file deleted");
          }
-         tempFile.delete();
-         log.info("Temp file deleted");
          return FileVisitResult.CONTINUE;
       }
 
       private DailyRainfallStationData map(RawDailyRainfallStationData input) {
-         LocalDate date = LocalDate.of(
-            Integer.valueOf(input.getYear()),
-            Integer.valueOf(input.getMonth()),
-            Integer.valueOf(input.getDay())
-         );
+         LocalDate date = DateUtils.createLocalDate(input.getYear(), input.getMonth(), input.getDay());
          boolean noRainfallData = NO_MEASURE_INDICATOR.equals(input.getRainfallStatus());
          boolean noSnowData = NO_MEASURE_INDICATOR.equals(input.getSnowStatus());
 

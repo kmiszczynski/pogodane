@@ -12,6 +12,7 @@ import java.nio.file.attribute.BasicFileAttributes;
 @Slf4j
 public abstract class AbstractStationDataGenerator {
 
+   protected static final String NO_MEASURE_INDICATOR = "8";
    private static final String TEMP_DIR = "/input/temp";
 
    public void generateData() {
@@ -21,6 +22,10 @@ public abstract class AbstractStationDataGenerator {
       } catch (IOException e) {
          log.error("Exception occurred while walking through zipped files", e);
       }
+   }
+
+   protected boolean isNotCsvFile(File tempFile) {
+      return !tempFile.getName().contains(".csv");
    }
 
    private class ZippedFileProcessor extends SimpleFileVisitor<Path> {
@@ -37,6 +42,7 @@ public abstract class AbstractStationDataGenerator {
             // process unzipped files
             FileVisitor<Path> fileVisitor = unzippedDataFileProcessor();
             Files.walkFileTree(Paths.get(TEMP_DIR), fileVisitor);
+            persistBatch();
          } catch (ZipException e) {
             log.error("Exception occurred while unzipping data file", e);
          } catch (IOException e) {
@@ -49,4 +55,6 @@ public abstract class AbstractStationDataGenerator {
    public abstract String rootDirectory();
 
    public abstract FileVisitor<Path> unzippedDataFileProcessor();
+
+   public abstract void persistBatch();
 }
