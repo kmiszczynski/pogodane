@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<smooks-resource-list xmlns="http://www.milyn.org/xsd/smooks-1.1.xsd"
+                      xmlns:csv="http://www.milyn.org/xsd/smooks/csv-1.2.xsd">
+   <csv:reader fields="stationCode,
+   stationName,
+   year,
+   month,
+   rainfallAmount,
+   rainfallAmountStatus,
+   daysWithSnow,
+   daysWithSnowStatus,
+   maximumRainfallAmount,
+   maximumRainfallAmountStatus">
+      <csv:listBinding beanId="rawMonthlyRainfallStationDataList" class="pl.pogodane.generators.model.RawMonthlyRainfallStationData"/>
+   </csv:reader>
+</smooks-resource-list>
