@@ -1,7 +1,6 @@
 package pl.pogodane.generators;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.io.IOUtils;
 import org.milyn.Smooks;
 import org.milyn.container.ExecutionContext;
@@ -25,7 +24,6 @@ import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,7 +35,6 @@ public class DailyMeteorologicalStationDataGenerator extends AbstractStationData
    private Map<StationEntryKey, DailyMeteorologicalStationData> generatedData = new HashMap<>();
    @Autowired
    private DailyMeteorologicalStationDataRepository dailyMeteorologicalStationDataRepository;
-   private static final int PERSISTANCE_BATCH_SIZE = 5000;
 
    @Override public String rootDirectory() {
       return "/input/daily/klimat";

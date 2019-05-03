@@ -4,10 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import pl.pogodane.generators.BasicDataGenerator;
-import pl.pogodane.generators.DailyMeteorologicalStationDataGenerator;
-import pl.pogodane.generators.DailyRainfallStationDataGenerator;
-import pl.pogodane.generators.StationsForCityGenerator;
+import pl.pogodane.generators.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -23,11 +20,14 @@ public class PogodaneAppApplication implements CommandLineRunner {
    private DailyRainfallStationDataGenerator dailyRainfallStationDataGenerator;
    @Autowired
    private DailyMeteorologicalStationDataGenerator dailyMeteorologicalStationDataGenerator;
+   @Autowired
+   private DailySynopticalStationDataGenerator dailySynopticalStationDataGenerator;
 
    private static final String LOAD_BASIC_DATA_PARAM = "--loadBasicData";
    private static final String GENERATE_CITY_STATIONS_PARAM = "--generateCityStations";
    private static final String GENERATE_DAILY_RAINFALL_STATION_DATA = "--generateDailyRainfallStationData";
    private static final String GENERATE_DAILY_METEOROLOGICAL_STATION_DATA = "--generateDailyMeteorologicalStationData";
+   private static final String GENERATE_DAILY_SYNOPTICAL_STATION_DATA = "--generateDailySynopticalStationData";
 
    public static void main(String[] args) {
       SpringApplication.run(PogodaneAppApplication.class, args);
@@ -48,6 +48,9 @@ public class PogodaneAppApplication implements CommandLineRunner {
          }
          if (parameters.contains(GENERATE_DAILY_METEOROLOGICAL_STATION_DATA)) {
             dailyMeteorologicalStationDataGenerator.generateData();
+         }
+         if (parameters.contains(GENERATE_DAILY_SYNOPTICAL_STATION_DATA)) {
+            dailySynopticalStationDataGenerator.generateData();
          }
       }
    }

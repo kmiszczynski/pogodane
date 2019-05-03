@@ -13,12 +13,14 @@ import java.nio.file.attribute.BasicFileAttributes;
 public abstract class AbstractStationDataGenerator {
 
    protected static final String NO_MEASURE_INDICATOR = "8";
+   protected static final int PERSISTANCE_BATCH_SIZE = 5000;
    private static final String TEMP_DIR = "/input/temp";
 
    public void generateData() {
       FileVisitor<Path> fileVisitor = new ZippedFileProcessor();
       try {
          Files.walkFileTree(Paths.get(rootDirectory()), fileVisitor);
+         log.info("Processing finished.");
       } catch (IOException e) {
          log.error("Exception occurred while walking through zipped files", e);
       }
