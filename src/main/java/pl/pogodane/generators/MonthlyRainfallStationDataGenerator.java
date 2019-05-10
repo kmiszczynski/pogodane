@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @Component
-public class RawMonthlyRainfallStationDataGenerator extends AbstractStationDataGenerator {
+public class MonthlyRainfallStationDataGenerator extends AbstractStationDataGenerator {
    @Autowired
    private MonthlyRainfallStationDataRepository repository;
 

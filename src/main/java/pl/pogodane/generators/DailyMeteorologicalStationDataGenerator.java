@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import pl.pogodane.generators.model.DateUtils;
 import pl.pogodane.generators.model.RawDailyMeteorologicalStationKDData;
 import pl.pogodane.generators.model.RawDailyMeteorologicalStationKDTData;
-import pl.pogodane.generators.model.StationEntryKey;
+import pl.pogodane.generators.model.DailyStationEntryKey;
 import pl.pogodane.mongo.DailyMeteorologicalStationData;
 import pl.pogodane.mongo.repositories.DailyMeteorologicalStationDataRepository;
 
@@ -32,7 +32,7 @@ import java.util.Map;
 @Component
 public class DailyMeteorologicalStationDataGenerator extends AbstractStationDataGenerator {
 
-   private Map<StationEntryKey, DailyMeteorologicalStationData> generatedData = new HashMap<>();
+   private Map<DailyStationEntryKey, DailyMeteorologicalStationData> generatedData = new HashMap<>();
    @Autowired
    private DailyMeteorologicalStationDataRepository dailyMeteorologicalStationDataRepository;
 
@@ -80,10 +80,10 @@ public class DailyMeteorologicalStationDataGenerator extends AbstractStationData
             List<RawDailyMeteorologicalStationKDData> rawDailyMeteorologicalStationKDData = (List<RawDailyMeteorologicalStationKDData>) result.getBean("rawDailyMeteorologicalStationKDDataList");
             for (RawDailyMeteorologicalStationKDData entry : rawDailyMeteorologicalStationKDData) {
                LocalDate date = DateUtils.createLocalDate(entry.getYear(), entry.getMonth(), entry.getDay());
-               StationEntryKey stationEntryKey = new StationEntryKey(entry.getStationCode(), date);
-               DailyMeteorologicalStationData stationData = generatedData.getOrDefault(stationEntryKey, new DailyMeteorologicalStationData());
+               DailyStationEntryKey dailyStationEntryKey = new DailyStationEntryKey(entry.getStationCode(), date);
+               DailyMeteorologicalStationData stationData = generatedData.getOrDefault(dailyStationEntryKey, new DailyMeteorologicalStationData());
                updateWithKdData(stationData, entry);
-               generatedData.put(stationEntryKey, stationData);
+               generatedData.put(dailyStationEntryKey, stationData);
             }
          } catch (Exception e) {
             log.error("Exception occurred while parsing KD file", e);
@@ -118,10 +118,10 @@ public class DailyMeteorologicalStationDataGenerator extends AbstractStationData
             List<RawDailyMeteorologicalStationKDTData> rawDailyMeteorologicalStationKDTData = (List<RawDailyMeteorologicalStationKDTData>) result.getBean("rawDailyMeteorologicalStationKDTDataList");
             for (RawDailyMeteorologicalStationKDTData entry : rawDailyMeteorologicalStationKDTData) {
                LocalDate date = DateUtils.createLocalDate(entry.getYear(), entry.getMonth(), entry.getDay());
-               StationEntryKey stationEntryKey = new StationEntryKey(entry.getStationCode(), date);
-               DailyMeteorologicalStationData stationData = generatedData.getOrDefault(stationEntryKey, new DailyMeteorologicalStationData());
+               DailyStationEntryKey dailyStationEntryKey = new DailyStationEntryKey(entry.getStationCode(), date);
+               DailyMeteorologicalStationData stationData = generatedData.getOrDefault(dailyStationEntryKey, new DailyMeteorologicalStationData());
                updateWithKdtData(stationData, entry);
-               generatedData.put(stationEntryKey, stationData);
+               generatedData.put(dailyStationEntryKey, stationData);
             }
          } catch (Exception e) {
             log.error("Exception occurred while parsing KD file", e);

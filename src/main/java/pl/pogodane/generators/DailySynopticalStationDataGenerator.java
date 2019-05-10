@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import pl.pogodane.generators.model.DateUtils;
 import pl.pogodane.generators.model.RawDailySynopticalStationSDData;
 import pl.pogodane.generators.model.RawDailySynopticalStationSDTData;
-import pl.pogodane.generators.model.StationEntryKey;
+import pl.pogodane.generators.model.DailyStationEntryKey;
 import pl.pogodane.mongo.DailySynopticalStationData;
 import pl.pogodane.mongo.repositories.DailySynopticalStationDataRepository;
 
@@ -32,7 +32,7 @@ import java.util.Map;
 @Component
 public class DailySynopticalStationDataGenerator extends AbstractStationDataGenerator {
 
-   private Map<StationEntryKey, DailySynopticalStationData> generatedData = new HashMap<>();
+   private Map<DailyStationEntryKey, DailySynopticalStationData> generatedData = new HashMap<>();
    @Autowired
    private DailySynopticalStationDataRepository repository;
 
@@ -71,10 +71,10 @@ public class DailySynopticalStationDataGenerator extends AbstractStationDataGene
             List<RawDailySynopticalStationSDTData> rawDailySynopticalStationSDTData = (List<RawDailySynopticalStationSDTData>) result.getBean("rawDailySynopticalSDTDataList");
             for (RawDailySynopticalStationSDTData entry : rawDailySynopticalStationSDTData) {
                LocalDate date = DateUtils.createLocalDate(entry.getYear(), entry.getMonth(), entry.getDay());
-               StationEntryKey stationEntryKey = new StationEntryKey(entry.getStationCode(), date);
-               DailySynopticalStationData stationData = generatedData.getOrDefault(stationEntryKey, new DailySynopticalStationData());
+               DailyStationEntryKey dailyStationEntryKey = new DailyStationEntryKey(entry.getStationCode(), date);
+               DailySynopticalStationData stationData = generatedData.getOrDefault(dailyStationEntryKey, new DailySynopticalStationData());
                updateWithSdtData(stationData, entry);
-               generatedData.put(stationEntryKey, stationData);
+               generatedData.put(dailyStationEntryKey, stationData);
             }
          } catch (Exception e) {
             log.error("Exception occurred while parsing KD file", e);
@@ -93,10 +93,10 @@ public class DailySynopticalStationDataGenerator extends AbstractStationDataGene
             List<RawDailySynopticalStationSDData> rawDailySynopticalStationSDData = (List<RawDailySynopticalStationSDData>) result.getBean("rawDailySynopticalSDDataList");
             for (RawDailySynopticalStationSDData entry : rawDailySynopticalStationSDData) {
                LocalDate date = DateUtils.createLocalDate(entry.getYear(), entry.getMonth(), entry.getDay());
-               StationEntryKey stationEntryKey = new StationEntryKey(entry.getStationCode(), date);
-               DailySynopticalStationData stationData = generatedData.getOrDefault(stationEntryKey, new DailySynopticalStationData());
+               DailyStationEntryKey dailyStationEntryKey = new DailyStationEntryKey(entry.getStationCode(), date);
+               DailySynopticalStationData stationData = generatedData.getOrDefault(dailyStationEntryKey, new DailySynopticalStationData());
                updateWithSdData(stationData, entry);
-               generatedData.put(stationEntryKey, stationData);
+               generatedData.put(dailyStationEntryKey, stationData);
             }
          } catch (Exception e) {
             log.error("Exception occurred while parsing KD file", e);

@@ -12,14 +12,14 @@ import java.util.Objects;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class StationEntryKey {
+public class DailyStationEntryKey {
    private String stationID;
    private LocalDate date;
 
    @Override public boolean equals(Object o) {
       if (this == o) return true;
       if (o == null || getClass() != o.getClass()) return false;
-      StationEntryKey that = (StationEntryKey) o;
+      DailyStationEntryKey that = (DailyStationEntryKey) o;
       return stationID.equals(that.stationID) &&
          date.equals(that.date);
    }
