@@ -20,7 +20,14 @@
    rainfallAmount,
    rainfallAmountStatus,
    maximumRainfallAmount,
-   maximumRainfallAmountStatus">
+   maximumRainfallAmountStatus,
+   firstDayOfMaximumRainfall,
+   lastDayOfMaximumRainfall,
+   maximumSnowHeight,
+   maximumSnowHeightStatus,
+   daysWithSnowSurface,
+   daysWithRain,
+   daysWithSnow">
       <csv:listBinding beanId="rawMonthlyMeteorologicalStationKMDDataList" class="pl.pogodane.generators.model.RawMonthlyMeteorologicalStationKMDData"/>
    </csv:reader>
 </smooks-resource-list>

@@ -141,6 +141,11 @@ public class MonthlyMeteorologicalStationDataGenerator extends AbstractStationDa
          stationData.setAverageMaximumTemperatureMeasured(!NO_MEASURE_INDICATOR.equals(entry.getAverageMaximumTemperatureStatus()));
          stationData.setAverageMinimumTemperature(new BigDecimal(entry.getAverageMinimalTemperature()));
          stationData.setAverageMinimumTemperatureMeasured(!NO_MEASURE_INDICATOR.equals(entry.getAverageMinimalTemperatureStatus()));
+         stationData.setMaximumSnowHeight(new BigDecimal(entry.getMaximumSnowHeight()));
+         stationData.setMaximumSnowHeightMeasured(!NO_MEASURE_INDICATOR.equals(entry.getMaximumSnowHeightStatus()));
+         stationData.setDaysWithSnowSurface(Integer.valueOf(entry.getDaysWithSnowSurface()));
+         stationData.setDaysWithRain(Integer.valueOf(entry.getDaysWithRain()));
+         stationData.setDaysWithSnow(Integer.valueOf(entry.getDaysWithSnow()));
       }
    }
 }

@@ -26,4 +26,12 @@ public class RawMonthlyMeteorologicalStationKMDData {
    private String rainfallAmountStatus;
    private String maximumRainfallAmount;
    private String maximumRainfallAmountStatus;
+   private String firstDayOfMaximumRainfall;
+   private String lastDayOfMaximumRainfall;
+   private String maximumSnowHeight;
+   private String maximumSnowHeightStatus;
+   private String daysWithSnowSurface;
+   private String daysWithRain;
+   private String daysWithSnow;
+
 }

@@ -46,4 +46,9 @@ public class MonthlyMeteorologicalStationData {
    private boolean averageCloudinessMeasured;
    private BigDecimal maximumRainfallAmount;
    private boolean maximumRainfallAmountMeasured;
+   private BigDecimal maximumSnowHeight;
+   private boolean maximumSnowHeightMeasured;
+   private int daysWithSnowSurface;
+   private int daysWithRain;
+   private int daysWithSnow;
 }
