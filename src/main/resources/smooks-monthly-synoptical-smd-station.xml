@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<smooks-resource-list xmlns="http://www.milyn.org/xsd/smooks-1.1.xsd"
+                      xmlns:csv="http://www.milyn.org/xsd/smooks/csv-1.2.xsd">
+   <csv:reader fields="stationCode,
+   stationName,
+   year,
+   month,
+   maximumTemperature,
+   maximumTemperatureStatus,
+   averageMaximumTemperature,
+   averageMaximumTemperatureStatus,
+   minimalTemperature,
+   minimalTemperatureStatus,
+   averageMinimalTemperature,
+   averageMinimalTemperatureStatus,
+   averageTemperature,
+   averageTemperatureStatus,
+   minimalGroundTemperature,
+   minimalGroundTemperatureStatus,
+   rainfallAmount,
+   rainfallAmountStatus,
+   maximumRainfallAmount,
+   maximumRainfallAmountStatus,
+   firstDayOfMaximumRainfall,
+   lastDayOfMaximumRainfall,
+   timeOfSun,
+   timeOfSunStatus,
+   maximumSnowHeight,
+   maximumSnowHeightStatus,
+   daysWithSnowSurface,
+   daysWithSnowSurfaceStatus,
+   daysWithRain,
+   daysWithRainStatus,
+   daysWithSnow,
+   daysWithSnowStatus">
+      <csv:listBinding beanId="rawMonthlySynopticalStationSMDDataList" class="pl.pogodane.generators.model.RawMonthlySynopticalStationSMDData"/>
+   </csv:reader>
+</smooks-resource-list>
