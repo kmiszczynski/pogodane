@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 
 @Component
 @Slf4j
-public class StationsForCityGenerator {
+public class StationsForCityGenerator implements DataGenerator {
 
    @Value("${station.maximumDistance}")
    private double MAXIMUM_DISTANCE_FROM_CITY;
@@ -35,7 +35,7 @@ public class StationsForCityGenerator {
 
    private static final double BASE_RANK = 5000;
 
-   public void supplyCitiesWithStations() {
+   public void generateData() {
       List<City> cities = cityRepository.findAll();
       List<Station> stations = stationRepository.findAll()
          .stream()

@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 @Component
 @Slf4j
-public class MonthlyCityDataGenerator {
+public class MonthlyCityDataGenerator implements DataGenerator {
 
    private static final int LAST_YEAR = 2019;
 

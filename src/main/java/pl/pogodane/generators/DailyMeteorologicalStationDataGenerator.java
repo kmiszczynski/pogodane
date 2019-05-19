@@ -30,7 +30,7 @@ import java.util.Map;
 
 @Slf4j
 @Component
-public class DailyMeteorologicalStationDataGenerator extends AbstractStationDataGenerator {
+public class DailyMeteorologicalStationDataGenerator extends AbstractStationDataGenerator implements DataGenerator {
 
    private Map<DailyStationEntryKey, DailyMeteorologicalStationData> generatedData = new HashMap<>();
    @Autowired

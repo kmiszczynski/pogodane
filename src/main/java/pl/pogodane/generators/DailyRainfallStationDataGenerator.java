@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 
 @Component
 @Slf4j
-public class DailyRainfallStationDataGenerator extends AbstractStationDataGenerator {
+public class DailyRainfallStationDataGenerator extends AbstractStationDataGenerator implements DataGenerator {
 
    private static final String ROOT = "/input/daily/opad";
 

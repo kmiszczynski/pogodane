@@ -28,7 +28,7 @@ import java.util.Map;
 
 @Component
 @Slf4j
-public class MonthlyMeteorologicalStationDataGenerator extends AbstractStationDataGenerator {
+public class MonthlyMeteorologicalStationDataGenerator extends AbstractStationDataGenerator implements DataGenerator {
    private Map<MonthlyStationEntryKey, MonthlyMeteorologicalStationData> generatedData = new HashMap<>();
    @Autowired
    private MonthlyMeteorologicalStationDataRepository repository;

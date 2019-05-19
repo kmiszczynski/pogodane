@@ -31,7 +31,7 @@ import java.util.stream.Collectors;
 
 @Component
 @Slf4j
-public class BasicDataGenerator {
+public class BasicDataGenerator implements DataGenerator {
    private static final String API_KEY = "AIzaSyDF1CGlbncDOtXzfsRdS5tGvfDTgiZtdLw";
 
    private static final String CITY_TYPE = "miasto";
@@ -44,7 +44,7 @@ public class BasicDataGenerator {
    @Autowired
    private CityCreator cityCreator;
 
-   public void generateBasicData() throws IOException, SAXException, ExecutionException, InterruptedException {
+   public void generateData() throws IOException, SAXException, ExecutionException, InterruptedException {
       ExecutorService executorService = Executors.newFixedThreadPool(THREAD_POOL);
 
       List<Station> stations = fetchStationsFromFile();

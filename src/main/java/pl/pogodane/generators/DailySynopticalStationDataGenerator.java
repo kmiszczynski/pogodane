@@ -30,7 +30,7 @@ import java.util.Map;
 
 @Slf4j
 @Component
-public class DailySynopticalStationDataGenerator extends AbstractStationDataGenerator {
+public class DailySynopticalStationDataGenerator extends AbstractStationDataGenerator implements DataGenerator {
 
    private Map<DailyStationEntryKey, DailySynopticalStationData> generatedData = new HashMap<>();
    @Autowired

@@ -28,7 +28,7 @@ import java.util.Map;
 
 @Slf4j
 @Component
-public class MonthlySynopticalStationDataGenerator extends AbstractStationDataGenerator {
+public class MonthlySynopticalStationDataGenerator extends AbstractStationDataGenerator implements DataGenerator {
    private Map<MonthlyStationEntryKey, MonthlySynopticalStationData> generatedData = new HashMap<>();
    @Autowired
    private MonthlySynopticalStationDataRepository repository;
