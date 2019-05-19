@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 
 @Document
 @CompoundIndexes({
-   @CompoundIndex(name = "stationId_year", def = "{'stationId': 1, 'year': 1}")
+   @CompoundIndex(name = "stationId_year_month", def = "{'stationId': 1, 'year': 1, 'month': 1}")
 }
 )
 @Getter

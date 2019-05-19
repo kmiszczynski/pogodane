@@ -28,6 +28,8 @@ public class PogodaneAppApplication implements CommandLineRunner {
    private MonthlyMeteorologicalStationDataGenerator monthlyMeteorologicalStationDataGenerator;
    @Autowired
    private MonthlySynopticalStationDataGenerator monthlySynopticalStationDataGenerator;
+   @Autowired
+   private MonthlyCityDataGenerator monthlyCityDataGenerator;
 
    private static final String LOAD_BASIC_DATA_PARAM = "--loadBasicData";
    private static final String GENERATE_CITY_STATIONS_PARAM = "--generateCityStations";
@@ -37,6 +39,7 @@ public class PogodaneAppApplication implements CommandLineRunner {
    private static final String GENERATE_MONTHLY_RAINFALL_STATION_DATA = "--generateMonthlyRainfallStationData";
    private static final String GENERATE_MONTHLY_METEOROLOGICAL_STATION_DATA = "--generateMonthlyMeteorologicalStationData";
    private static final String GENERATE_MONTHLY_SYNOPTICAL_STATION_DATA = "--generateMonthlySynopticalStationData";
+   private static final String GENERATE_MONTHLY_CITY_DATA = "--generateMonthlyCityData";
 
    public static void main(String[] args) {
       SpringApplication.run(PogodaneAppApplication.class, args);
@@ -69,6 +72,9 @@ public class PogodaneAppApplication implements CommandLineRunner {
          }
          if (parameters.contains(GENERATE_MONTHLY_SYNOPTICAL_STATION_DATA)) {
             monthlySynopticalStationDataGenerator.generateData();
+         }
+         if (parameters.contains(GENERATE_MONTHLY_CITY_DATA)) {
+            monthlyCityDataGenerator.generateData();
          }
       }
    }

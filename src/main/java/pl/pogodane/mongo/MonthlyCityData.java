@@ -1,17 +1,16 @@
 package pl.pogodane.mongo;
 
 import lombok.*;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.index.CompoundIndexes;
-import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Document
 @CompoundIndexes({
-   @CompoundIndex(name = "stationId_year_month", def = "{'stationId': 1, 'year': 1, 'month': 1}")
+   @CompoundIndex(name = "cityTechnicalId_year", def = "{'cityTechnicalId': 1, 'year': 1}")
 }
 )
 @Getter
@@ -19,13 +18,18 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class MonthlyMeteorologicalStationData {
-   @Id
+public class MonthlyCityData {
    private String id;
-   @Indexed
-   private String stationId;
+   private String cityTechnicalId;
+   private String cityName;
+   private List<String> stationsUsed;
    private String year;
    private String month;
+   private BigDecimal rainfallAmount;
+   private boolean rainfallAmountMeasured;
+   private int daysWithSnow;
+   private BigDecimal maximumRainfallAmount;
+   private boolean maximumRainfallAmountMeasured;
    private BigDecimal maximumTemperature;
    private boolean maximumTemperatureMeasured;
    private BigDecimal minimumTemperature;
@@ -36,19 +40,22 @@ public class MonthlyMeteorologicalStationData {
    private boolean averageMaximumTemperatureMeasured;
    private BigDecimal averageMinimumTemperature;
    private boolean averageMinimumTemperatureMeasured;
-   private BigDecimal rainfallAmount;
-   private boolean rainfallAmountMeasured;
    private BigDecimal averageHumidity;
    private boolean averageHumidityMeasured;
    private BigDecimal averageWindSpeed;
    private boolean averageWindSpeedMeasured;
    private BigDecimal averageCloudiness;
    private boolean averageCloudinessMeasured;
-   private BigDecimal maximumRainfallAmount;
-   private boolean maximumRainfallAmountMeasured;
    private BigDecimal maximumSnowHeight;
    private boolean maximumSnowHeightMeasured;
    private int daysWithSnowSurface;
    private int daysWithRain;
-   private int daysWithSnow;
+   private BigDecimal averageAirPressure;
+   private boolean averageAirPressureMeasured;
+
+   public boolean anyDataExists() {
+      return rainfallAmountMeasured || maximumRainfallAmountMeasured || maximumTemperatureMeasured
+         || minimumTemperatureMeasured || averageTemperatureMeasured || averageMaximumTemperatureMeasured || averageMinimumTemperatureMeasured
+         || averageHumidityMeasured || averageWindSpeedMeasured || averageCloudinessMeasured || maximumSnowHeightMeasured || averageAirPressureMeasured;
+   }
 }
