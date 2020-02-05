@@ -94,7 +94,7 @@ public class YearlyCityDataGenerator implements DataGenerator {
       Optional<Integer> daysWithRain = monthlyCityData.stream()
          .map(MonthlyCityData::getDaysWithRain)
          .reduce(Integer::sum);
-      result.setDaysWithSnow(daysWithRain.orElse(0));
+      result.setDaysWithRain(daysWithRain.orElse(0));
    }
 
    private void calculateMaximumSnowHeight(List<MonthlyCityData> monthlyCityData, YearlyCityData result) {
@@ -205,6 +205,7 @@ public class YearlyCityDataGenerator implements DataGenerator {
       }
    }
 
+   // TODO KM: check why calculated incorrectly
    private void calculateDaysWithSnow(List<MonthlyCityData> dataForYear, YearlyCityData result) {
       Optional<Integer> daysWithSnow = dataForYear.stream()
          .map(MonthlyCityData::getDaysWithSnow)
