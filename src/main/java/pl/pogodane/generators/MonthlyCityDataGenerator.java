@@ -36,7 +36,6 @@ public class MonthlyCityDataGenerator implements DataGenerator {
       List<City> allCities = cityRepository.findAll();
       allCities
          .parallelStream()
-         .limit(10)
          .forEach(this::handleCity);
    }
 

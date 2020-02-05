@@ -1,6 +1,5 @@
 package pl.pogodane.generators.utils;
 
-import org.springframework.stereotype.Component;
 import pl.pogodane.mongo.Station;
 
 import java.util.List;

@@ -32,6 +32,8 @@ public class PogodaneAppApplication implements CommandLineRunner {
    private MonthlySynopticalStationDataGenerator monthlySynopticalStationDataGenerator;
    @Autowired
    private MonthlyCityDataGenerator monthlyCityDataGenerator;
+   @Autowired
+   private YearlyCityDataGenerator yearlyCityDataGenerator;
 
    private static final String LOAD_BASIC_DATA_PARAM = "--loadBasicData";
    private static final String GENERATE_CITY_STATIONS_PARAM = "--generateCityStations";
@@ -42,6 +44,7 @@ public class PogodaneAppApplication implements CommandLineRunner {
    private static final String GENERATE_MONTHLY_METEOROLOGICAL_STATION_DATA = "--generateMonthlyMeteorologicalStationData";
    private static final String GENERATE_MONTHLY_SYNOPTICAL_STATION_DATA = "--generateMonthlySynopticalStationData";
    private static final String GENERATE_MONTHLY_CITY_DATA = "--generateMonthlyCityData";
+   private static final String GENERATE_YEARLY_CITY_DATE = "--generateYearlyCityData";
 
    private static final Map<String, DataGenerator> dataGenerators = new LinkedHashMap<>();
 
@@ -61,6 +64,7 @@ public class PogodaneAppApplication implements CommandLineRunner {
       dataGenerators.put(GENERATE_MONTHLY_METEOROLOGICAL_STATION_DATA, monthlyMeteorologicalStationDataGenerator);
       dataGenerators.put(GENERATE_MONTHLY_SYNOPTICAL_STATION_DATA, monthlySynopticalStationDataGenerator);
       dataGenerators.put(GENERATE_MONTHLY_CITY_DATA, monthlyCityDataGenerator);
+      dataGenerators.put(GENERATE_YEARLY_CITY_DATE, yearlyCityDataGenerator);
 
       if (args.length > 0) {
          List<String> parameters = Arrays.asList(args);
