@@ -6,6 +6,7 @@ import pl.pogodane.api.City;
 import pl.pogodane.mongo.repositories.CityRepository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -18,6 +19,14 @@ public class CitiesService {
          .stream()
          .map(this::map)
          .collect(Collectors.toList());
+   }
+
+   public Optional<City> findByTechnicalId(String technicalId) {
+      pl.pogodane.mongo.City city = cityRepository.findByTechnicalId(technicalId);
+      if (city == null) {
+         return Optional.empty();
+      }
+      return Optional.of(map(city));
    }
 
    private City map(pl.pogodane.mongo.City input) {
