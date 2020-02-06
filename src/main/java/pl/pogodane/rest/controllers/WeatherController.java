@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+import pl.pogodane.api.AllYearsCityResponse;
 import pl.pogodane.api.YearForCityResponse;
 import pl.pogodane.rest.DICTIONARY;
 import pl.pogodane.service.WeatherService;
@@ -18,5 +19,11 @@ public class WeatherController {
    @CrossOrigin(origins = "http://localhost:4200")
    public YearForCityResponse getYearForCityResponse(@PathVariable String city, @PathVariable String year) {
       return weatherService.createYearForCityResponse(city, year);
+   }
+
+   @GetMapping(value = DICTIONARY.WEATHER_DATA + "/{city}")
+   @CrossOrigin(origins = "http://localhost:4200")
+   public AllYearsCityResponse getAllYearsForCityResponse(@PathVariable String city) {
+      return weatherService.createAllYearCityResponse(city);
    }
 }

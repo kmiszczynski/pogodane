@@ -3,6 +3,7 @@ package pl.pogodane.mongo;
 import lombok.*;
 import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.index.CompoundIndexes;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.math.BigDecimal;
@@ -19,6 +20,7 @@ import java.math.BigDecimal;
 @Builder
 public class YearlyCityData {
    private String id;
+   @Indexed
    private String cityTechnicalId;
    private String cityName;
    private String year;
