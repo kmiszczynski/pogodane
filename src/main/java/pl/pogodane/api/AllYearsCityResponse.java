@@ -25,4 +25,7 @@ public class AllYearsCityResponse {
    private BigDecimal maximumRainfallAmount;
    private String maximumRainfallAmountYear;
    private String maximumRainfallAmountMonth;
+   private BigDecimal averageTemperature;
+   private BigDecimal maximumYearlyRainfallAmount;
+   private String maximumYearlyRainfallAmountYear;
 }
