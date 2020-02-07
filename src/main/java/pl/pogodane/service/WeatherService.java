@@ -3,6 +3,7 @@ package pl.pogodane.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.pogodane.api.AllYearsCityResponse;
+import pl.pogodane.api.AvailableYearsForCityResponse;
 import pl.pogodane.api.YearForCityResponse;
 import pl.pogodane.mongo.MonthlyCityData;
 import pl.pogodane.mongo.YearlyCityData;
@@ -20,6 +21,16 @@ public class WeatherService {
     private YearlyCityDataRepository yearlyCityDataRepository;
     @Autowired
     private MonthlyCityDataRepostiory monthlyCityDataRepostiory;
+
+    public AvailableYearsForCityResponse getAvailableYearsForCityResponse(String cityTechnicalId) {
+        List<String> availableYears = yearlyCityDataRepository.findAllByCityTechnicalId(cityTechnicalId).stream()
+                .map(YearlyCityData::getYear)
+                .distinct()
+                .sorted(Comparator.comparing(Integer::valueOf))
+                .collect(Collectors.toList());
+
+        return new AvailableYearsForCityResponse(availableYears);
+    }
 
     public YearForCityResponse createYearForCityResponse(String cityTechnicalId, String year) {
         YearlyCityData yearlyCityData = yearlyCityDataRepository.findByCityTechnicalIdAndYear(cityTechnicalId, year);
