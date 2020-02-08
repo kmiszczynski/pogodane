@@ -35,7 +35,7 @@ public class WeatherService {
     public YearForCityResponse createYearForCityResponse(String cityTechnicalId, String year) {
         YearlyCityData yearlyCityData = yearlyCityDataRepository.findByCityTechnicalIdAndYear(cityTechnicalId, year);
         List<MonthlyCityData> monthlyCityData = monthlyCityDataRepostiory.findAllByCityTechnicalIdAndYear(cityTechnicalId, year);
-
+        Collections.sort(monthlyCityData, Comparator.comparing(MonthlyCityData::getMonth));
         return new YearForCityResponse(yearlyCityData, monthlyCityData);
     }
 
@@ -87,7 +87,7 @@ public class WeatherService {
                 .averageTemperature(sumOfAverageTemperatures.map(sum -> sum.divide(
                         BigDecimal.valueOf(cityDataWithAverageTemperature.size()), 2, RoundingMode.HALF_UP))
                         .orElse(null))
-                .maximumYearlyRainfallAmount(maximumYearlyRainfallAmount.getMaximumRainfallAmount())
+                .maximumYearlyRainfallAmount(maximumYearlyRainfallAmount.getRainfallAmount())
                 .maximumYearlyRainfallAmountYear(maximumYearlyRainfallAmount.getYear())
                 .build();
     }
