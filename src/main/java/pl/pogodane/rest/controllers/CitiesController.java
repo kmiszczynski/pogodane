@@ -19,14 +19,14 @@ public class CitiesController {
    private CitiesService citiesService;
 
    @GetMapping(value = DICTIONARY.ALL_CITIES)
-   @CrossOrigin(origins = "http://localhost:4200")
+   @CrossOrigin(origins = "http://46.41.136.142")
    public CitiesResponse getAllCities() {
       List<City> cities = citiesService.fetchAllCities();
       return new CitiesResponse(cities);
    }
 
    @GetMapping(value = DICTIONARY.CITY + "/{technicalId}")
-   @CrossOrigin(origins = "http://localhost:4200")
+   @CrossOrigin(origins = "http://46.41.136.142")
    public City getCity(@PathVariable String technicalId) {
       Optional<City> city = citiesService.findByTechnicalId(technicalId);
 

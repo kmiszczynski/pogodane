@@ -17,19 +17,19 @@ public class WeatherController {
    private WeatherService weatherService;
 
    @GetMapping(value = DICTIONARY.WEATHER_DATA + "/{city}/{year}")
-   @CrossOrigin(origins = "http://localhost:4200")
+   @CrossOrigin(origins = "http://46.41.136.142")
    public YearForCityResponse getYearForCityResponse(@PathVariable String city, @PathVariable String year) {
       return weatherService.createYearForCityResponse(city, year);
    }
 
    @GetMapping(value = DICTIONARY.WEATHER_DATA + "/{city}")
-   @CrossOrigin(origins = "http://localhost:4200")
+   @CrossOrigin(origins = "http://46.41.136.142")
    public AllYearsCityResponse getAllYearsForCityResponse(@PathVariable String city) {
       return weatherService.createAllYearCityResponse(city);
    }
 
    @GetMapping(value = DICTIONARY.AVAILABLE_YEARS + "/{city}")
-   @CrossOrigin(origins = "http://localhost:4200")
+   @CrossOrigin(origins = "http://46.41.136.142")
    public AvailableYearsForCityResponse getAvailableYearsForCityResponse(@PathVariable String city) {
       return weatherService.getAvailableYearsForCityResponse(city);
    }
